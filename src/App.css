@@ -59,6 +59,8 @@ a {
   display: flex;
   font-family: 'Roboto', sans-serif;
   color: #00ffff;
+  align-items: center;
+  justify-content: center;
   text-shadow: 1px 1px #0485ac;
   font-size: 3.5vw;
 }
