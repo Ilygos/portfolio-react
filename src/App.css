@@ -42,6 +42,7 @@ a {
   background-color: var(--bg);
   padding: 0 1rem;
   border-bottom: var(--border);
+  text-align: center;
 }
 
 /* <ul> */
@@ -59,8 +60,6 @@ a {
   display: flex;
   font-family: 'Roboto', sans-serif;
   color: #00ffff;
-  align-items: center;
-  justify-content: center;
   text-shadow: 1px 1px #0485ac;
   font-size: 3.5vw;
 }

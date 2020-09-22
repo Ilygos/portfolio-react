@@ -27,6 +27,32 @@ const items = [
   }
 ]
 
+const projects = [
+  {
+    id: 1,
+    value: 'Kahiora',
+  },
+  {
+    id: 2,
+    value: 'PAC-MAN: Party Royal',
+  },
+  {
+    id: 3,
+    value: 'Write\'n slash',
+  },
+  {
+    id: 4,
+    value: 'Flump vs Humanity',
+  },
+  {
+    id: 5,
+    value: 'Beetlefield',
+  },
+  {
+    id: 6,
+    value: 'PeachAR',
+  },
+]
 
 function App() {
   return (
