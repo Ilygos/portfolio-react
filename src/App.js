@@ -1,182 +1,103 @@
 import React, { useState, useEffect, useRef} from 'react';
-import {ReactComponent as Icon} from './Icon/Icon.svg';
-import logo from './logo.svg';
-import { ReactComponent as BellIcon } from './Icon/bell.svg';
-import { ReactComponent as MessengerIcon } from './Icon/messenger.svg';
-import { ReactComponent as CaretIcon } from './Icon/caret.svg';
-import { ReactComponent as PlusIcon } from './Icon/plus.svg';
-import { ReactComponent as CogIcon } from './Icon/cog.svg';
-import { ReactComponent as ChevronIcon } from './Icon/chevron.svg';
-import { ReactComponent as ArrowIcon } from './Icon/arrow.svg';
-import { ReactComponent as BoltIcon } from './Icon/bolt.svg';
-import { CSSTransition } from 'react-transition-group';
+
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import './App.css';
 
-const items = [
-  {
-    id: 1,
-    value: 'Projects',
-  },
-  {
-    id: 2,
-    value: 'About me',
-  },
-  {
-    id: 3,
-    value: 'Contact',
-  }
-]
 
 const projects = [
   {
     id: 1,
-    value: 'Kahiora',
+    value: 'Sprite Editor Demo',
   },
   {
     id: 2,
-    value: 'PAC-MAN: Party Royal',
+    value: 'Maxence\'s Sandbox',
   },
   {
     id: 3,
-    value: 'Write\'n slash',
+    value: 'Kahiora',
   },
   {
     id: 4,
-    value: 'Flump vs Humanity',
+    value: 'PAC-MAN: Party Royal',
   },
   {
     id: 5,
-    value: 'Beetlefield',
+    value: 'Write\'n slash',
   },
   {
     id: 6,
+    value: 'Flump vs Humanity',
+  },
+  {
+    id: 7,
+    value: 'Beetlefield',
+  },
+  {
+    id: 8,
     value: 'PeachAR',
   },
 ]
 
+var state = "home";
+var projectID = -1;
+
 function App() {
   return (
-    <Navbar>
-      <h1 className="navbar-title">Maxence Beaumont</h1>
-      <NavItem content="About Me" />
-      <NavItem content="My projects">
-        <DropdownMenu></DropdownMenu>
-      </NavItem>
-      <NavItem content={<BellIcon />} />
-
-      
-    </Navbar>
-  );
-}
-
-function Navbar(props) {
-  return (
-    <nav className="navbar">
-      <ul className="navbar-nav">{props.children}</ul>
-    </nav>
-  );
-}
-
-function NavItem(props) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <li className="nav-item">
-      <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-        {props.content}
-      </a>
-
-      {open && props.children}
-    </li>
-  );
-}
-
-function DropdownMenu() {
-  const [activeMenu, setActiveMenu] = useState('main');
-  const [menuHeight, setMenuHeight] = useState(null);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
-  }, [])
-
-  function calcHeight(el) {
-    const height = el.offsetHeight;
-    setMenuHeight(height);
-  }
-
-  function DropdownItem(props) {
-    return (
-      <a href="#" className="menu-item" onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}>
-        <span className="icon-button">{props.leftIcon}</span>
-        {props.children}
-        <span className="icon-right">{props.rightIcon}</span>
-      </a>
-    );
-  }
-
-  return (
-    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
-
-      <CSSTransition
-        in={activeMenu === 'main'}
-        timeout={500}
-        classNames="menu-primary"
-        unmountOnExit
-        onEnter={calcHeight}>
-        <div className="menu">
-          <DropdownItem>My Profile</DropdownItem>
-          <DropdownItem
-            leftIcon={<CogIcon />}
-            rightIcon={<ChevronIcon />}
-            goToMenu="settings">
-            Settings
-          </DropdownItem>
-          <DropdownItem
-            leftIcon="🦧"
-            rightIcon={<ChevronIcon />}
-            goToMenu="animals">
-            Animals
-          </DropdownItem>
-
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={activeMenu === 'settings'}
-        timeout={500}
-        classNames="menu-secondary"
-        unmountOnExit
-        onEnter={calcHeight}>
-        <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>My Tutorial</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>HTML</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>CSS</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>JavaScript</DropdownItem>
-          <DropdownItem leftIcon={<BoltIcon />}>Awesome!</DropdownItem>
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={activeMenu === 'animals'}
-        timeout={500}
-        classNames="menu-secondary"
-        unmountOnExit
-        onEnter={calcHeight}>
-        <div className="menu">
-          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
-            <h2>Animals</h2>
-          </DropdownItem>
-          <DropdownItem leftIcon="🦘">Kangaroo</DropdownItem>
-          <DropdownItem leftIcon="🐸">Frog</DropdownItem>
-          <DropdownItem leftIcon="🦋">Horse?</DropdownItem>
-          <DropdownItem leftIcon="🦔">Hedgehog</DropdownItem>
-        </div>
-      </CSSTransition>
+    <div>
+      <NavbarFunction />
+      <BodyGenerator />
     </div>
   );
 }
 
+function BodyGenerator() {
+  var ret;
+  if (state === "project") {
+    ret = <ProjectBody />;
+  }
+  else {
+    ret = <HomeBody />;
+  }
+
+  return (ret);
+}
+
+function ProjectBody() {
+
+}
+
+function HomeBody() {
+  return (
+  <h1> Je suis l'home. {projectID} </h1>
+  );
+}
+
+function NavbarFunction() {
+  return (
+  <Navbar expand="lg">
+    <Navbar.Brand href="#home">BEAUMONT MAXENCE</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+      <Nav className="mr-auto">
+        <Nav.Link href="#about"a>About Me</Nav.Link>
+        <NavDropdown title="Projects" id="basic-nav-dropdown">
+          <ProjectsDropdown />
+        </NavDropdown>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>
+  );
+}
+
+function ProjectsDropdown() {
+  return (
+    projects.map((project) =>
+      <NavDropdown.Item onClick={projectID = project.value} href={'#project' + project.id}>{project.value}</NavDropdown.Item>
+    )
+  );
+}
 export default App;
