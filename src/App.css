@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css');
 @font-face {
-  font-family: 'Indelible';
-  src: url(Fonts/Indelible.otf) format('opentype');
+  font-family: 'Sephora';
+  src: url(Fonts/Sephora.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Kosugi';
+  src: url(Fonts/KosugiMaru-Regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'VCR';
@@ -10,7 +14,7 @@
 }
 
 body {
-  background-image: linear-gradient( rgba(0.5, 0.5, 0.5, 0.3), rgba(0, 0, 0, 0.4) ), url('img/SYNTH_BG.jpg'); ;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('img/SYNTH_BG.jpg'); ;
   background-color: #6d6d6d ;
   height: 1080px; /* You must set a specified height */
   background-position: center; /* Center the image */
@@ -21,7 +25,12 @@ body {
 
 .navbar {
   background-color: rgb(218, 218, 218);
-  font-family: 'VCR', sans-serif;
+  font-family: 'VCR', 'Kosugi', sans-serif;
+}
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
 }
 
 .violet-text {
@@ -29,13 +38,129 @@ body {
 }
 
 .navbar-brand {
-  font-family: 'Indelible', sans-serif;
+  font-family: 'Sephora', 'Kosugi', sans-serif;
 }
 
 h1 {
+  font-family: 'VCR', 'Kosugi', sans-serif;
   color: white;
 }
 
 p {
+  font-family: 'VCR', 'Kosugi', sans-serif;
   color: white;
+}
+
+.img-row {
+  content: "";
+  clear: both;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50%;
+  max-width: 15vh;
+  max-height: 15vh;
+}
+
+.rounded-rect-button {
+  float: left;
+  width: 50%;
+  padding: 5px;
+  border-radius: 25%;
+}
+
+.me-image {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  max-width: 25vh;
+  max-height: 25vh;
+  border-radius: 50%;
+}
+
+.about-image {
+  margin-top: 5vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  max-width: 150vh;
+  max-height: 75vh;
+}
+
+.about-txt {
+  text-align: center;
+  font-size: 1em;
+}
+
+.home-txt {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.paragraph-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding: .5rem;
+}
+
+.project-title {
+  margin-top: 2vh;
+  text-align: center;
+}
+
+.project-visual {
+  margin-top: 3vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 66%;
+  height: auto;
+  object-fit: cover;
+  max-width: 150vh;
+  max-height: 75vh;
+}
+
+.project-desc {
+  text-align: center;
+  font-size: 1em;
+}
+
+@media screen and (max-width: 873px)
+{
+  .about-image {
+    width: 75%;
+  }
+  .paragraph-container {
+    width: 75%;
+    padding: .5rem;
+  }
+
+  .project-visual {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 600px)
+{
+  .about-image {
+    width: 100%;
+  }
+  .project-visual {
+    width: 100%;
+  }
+  .paragraph-container {
+    width: 100%;
+    padding: .5rem;
+  }
 }

@@ -1,11 +1,13 @@
 // ReactJS
-import React, { useState, useEffect, setGlobal, useGlobal} from 'reactn';
+import React, {setGlobal, useGlobal} from 'reactn';
+
+// Libraries
+import detectBrowserLanguage from 'detect-browser-language';
 
 // Bootstrap
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Image from 'react-bootstrap/Image'
 
 // CSS
 import './App.css';
@@ -23,14 +25,22 @@ import pacman from './img/pacman.jpg';
 import peachar from './img/peachar.png';
 import writenslash from './img/writenslash.png'
 
+//About Image
+import aboutImg from './img/synthgif.gif';
+import linkedin from './img/LinkedIn.png';
+import gmail from './img/gmail.png';
+import me from './img/me.jpg'
+
 // CONSTS
 const PROJECT_STATE = 'project';
 const HOME_STATE = 'home';
 const ABOUT_STATE = 'about';
 
-const FRENCH_KEY = 'fr_FR';
-const ENGLISH_KEY = 'en_EN';
-const JAPANESE_KEY = 'ja_JP';
+const FRENCH_KEY = 'fr';
+const ENGLISH_KEY = 'en';
+const JAPANESE_KEY = 'ja';
+
+var firstTime = false;
 
 const languages = [
     {
@@ -101,6 +111,18 @@ setGlobal({
 
 // APP
 function App() {
+  const [ localization, setLocalization ] = useGlobal('localization');
+  if (!firstTime)
+  {
+    firstTime = true;
+    const lang = detectBrowserLanguage().substring(0,2);
+    if (lang === JAPANESE_KEY)
+      setLocalization(jpLocalization);
+    else if (lang === FRENCH_KEY)
+      setLocalization(frLocalization);
+    else 
+      setLocalization(enLocalization);
+  }
   return (
     <div>
       <NavbarFunction />
@@ -112,10 +134,14 @@ function App() {
 
 
 function BodyGenerator() {
-  const [ state, setState ] = useGlobal('state');
+  const [ state ] = useGlobal('state');
   var ret;
   if (state === PROJECT_STATE) {
     ret = <ProjectBody />;
+  }
+  else if (state === ABOUT_STATE)
+  {
+    ret = <AboutBody />;
   }
   else {
     ret = <HomeBody />;
@@ -124,39 +150,71 @@ function BodyGenerator() {
 }
 
 function ProjectBody() {
-  const [ projectID, setProjectID ] = useGlobal('projectID');
-  const [ localization, setLocalization ] = useGlobal('localization');
+  const [ projectID ] = useGlobal('projectID');
+  const [ localization ] = useGlobal('localization');
   const keyPrefix = "project_"+projectID;
   return(
     <>
     <h1 className="project-title">{localization.project[keyPrefix+"_name"]}</h1>
-    <Image src={projectVisuals[projectID]} fluid />
-    <p className="project-desc">{localization.project[keyPrefix+"_desc"]}</p>
+    <img src={projectVisuals[projectID]} className="project-visual" alt=""/>
+    <div className="paragraph-container">
+      <p className="project-desc">{localization.project[keyPrefix+"_desc"]}</p>
+    </div>
+    </>
+  );
+}
+
+function AboutBody() {
+  const [ localization ] = useGlobal('localization');
+  return (
+    <>
+      <img className="me-image" src={me} alt=""/>
+      <div className="paragraph-container">
+        <p className="about-txt">{localization.about["line1"]}</p>
+        <p className="about-txt">{localization.about["line2"]}</p>
+        <p className="about-txt">{localization.about["line3"]}</p>
+        <p className="about-txt">{localization.about["line4"]}</p>
+        <div className="img-row">
+          <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedin} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+        </div>
+      </div>
     </>
   );
 }
 
 function HomeBody() {
-  var prevInput =  <h1> Je suis l'home. </h1>;
+  const [ localization ] = useGlobal('localization');
+  var prevInput =  <h1 className="home-text"> Welcome to my website. It is still a work in progress, but please have a look around! :) </h1>;
   return (
-    prevInput
+    <>
+      <img className="about-image" src={aboutImg} alt=""/>
+      <div className="paragraph-container">
+        <p className="home-txt">{localization.home["text"]}</p>
+        <div className="img-row">
+          <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedin} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+        </div>
+      </div>
+    </>
   );
 }
 
 function NavbarFunction() {
   const [ state, setState ] = useGlobal('state');
+  const [ localization ] = useGlobal('localization');
 
   return (
-  <Navbar expand="lg">
-    <Navbar.Brand href="#home" onClick={(e) => {setState(HOME_STATE)}}>BEAUMONT MAXENCE</Navbar.Brand>
+  <Navbar expand="lg" className="sticky-nav">
+    <Navbar.Brand href={"#"+state} onClick={(e) => {setState(HOME_STATE)}}>{localization.navbar["brand"]}</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
-        <Nav.Link href="#about" onClick={(e) => {setState(ABOUT_STATE)}} >About Me</Nav.Link>
-        <NavDropdown title="Projects" id="basic-nav-dropdown">
+        <Nav.Link href={"#"+state} onClick={(e) => {setState(ABOUT_STATE)}} >{localization.navbar["about"]}</Nav.Link>
+        <NavDropdown title={localization.navbar["projects"]} id="basic-nav-dropdown">
           <ProjectsDropdown />
         </NavDropdown>
-        <NavDropdown title="Language" id="basic-nav-dropdown">
+        <NavDropdown title={localization.navbar["languages"]} id="basic-nav-dropdown">
           <LanguageDropdown />
         </NavDropdown>
       </Nav>
@@ -169,6 +227,7 @@ function LanguageDropdown() {
   const [ localization, setLocalization ] = useGlobal('localization');
   function localize(lang)
   {
+    console.log(lang);
     if (lang === FRENCH_KEY)
       setLocalization(frLocalization);
     else if (lang === JAPANESE_KEY)
@@ -176,6 +235,7 @@ function LanguageDropdown() {
     else 
       setLocalization(enLocalization);
   }
+  
   return (
     languages.map((language) =>
       <NavDropdown.Item onClick={(e) => {
