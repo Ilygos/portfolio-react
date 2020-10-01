@@ -20,10 +20,13 @@ import { jpLocalization } from './Localization/ja_JP';
 //Project Images
 import beetle from './img/beetle.png';
 import flump from './img/flump.png';
-import kaihora from './img/kaihora.jpg';
+import Kahiora from './img/kaihora.jpg';
 import pacman from './img/pacman.jpg';
 import peachar from './img/peachar.png';
-import writenslash from './img/writenslash.png'
+import writenslash from './img/writenslash.png';
+import youtube from './img/youtube.png';
+import download from './img/download.png';
+
 
 //About Image
 import aboutImg from './img/synthgif.gif';
@@ -85,7 +88,7 @@ const projects = [
 ]
 
 const projectVisuals = [
-  kaihora,
+  Kahiora,
   pacman,
   writenslash,
   flump,
@@ -153,12 +156,20 @@ function ProjectBody() {
   const [ projectID ] = useGlobal('projectID');
   const [ localization ] = useGlobal('localization');
   const keyPrefix = "project_"+projectID;
+  var trailerBtn = localization.project[keyPrefix+"_trailer"] === "" ? <div></div> : <a href={localization.project[keyPrefix+"_trailer"]} ><img src={youtube} className="rounded-rect-button" alt="Trailer" /></a>;
+  var downloadBtn = localization.project[keyPrefix+"_download"] === "" ? <div></div> : <a href={localization.project[keyPrefix+"_download"]} ><img src={download} className="rounded-rect-button" alt="Download" /></a>;
+  var buttons = 
+  <div className="img-row">
+        {trailerBtn}
+        {downloadBtn}
+  </div>;
   return(
     <>
     <h1 className="project-title">{localization.project[keyPrefix+"_name"]}</h1>
     <img src={projectVisuals[projectID]} className="project-visual" alt=""/>
     <div className="paragraph-container">
       <p className="project-desc">{localization.project[keyPrefix+"_desc"]}</p>
+      {buttons}
     </div>
     </>
   );
@@ -176,7 +187,7 @@ function AboutBody() {
         <p className="about-txt">{localization.about["line4"]}</p>
         <div className="img-row">
           <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedin} className="rounded-rect-button" alt="LinkedIn profile" /></a>
-          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="Send Mail" /></a>
         </div>
       </div>
     </>
@@ -193,7 +204,7 @@ function HomeBody() {
         <p className="home-txt">{localization.home["text"]}</p>
         <div className="img-row">
           <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedin} className="rounded-rect-button" alt="LinkedIn profile" /></a>
-          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmail} className="rounded-rect-button" alt="Send Mail" /></a>
         </div>
       </div>
     </>
