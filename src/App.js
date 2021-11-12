@@ -21,6 +21,7 @@ import { jpLocalization } from './Localization/ja_JP';
 import beetle from './img/beetle.png';
 import flump from './img/flump.png';
 import Kahiora from './img/kaihora.jpg';
+import renderingogl from './img/renderingogl.png';
 import pacman from './img/pacman.jpg';
 import peachar from './img/peachar.png';
 import writenslash from './img/writenslash.png';
@@ -66,29 +67,34 @@ const projects = [
     value: 'Kahiora',
   },
   {
-    id: 1,
-    value: 'PAC-MAN: Party Royal',
+    id:1,
+    value: 'Rendering OpenGL (Early Stage)'
   },
   {
     id: 2,
-    value: 'Write\'n slash',
+    value: 'PAC-MAN: Party Royal',
   },
   {
     id: 3,
-    value: 'Flump vs Humanity',
+    value: 'Write\'n slash',
   },
   {
     id: 4,
-    value: 'Beetlefield',
+    value: 'Flump vs Humanity',
   },
   {
     id: 5,
+    value: 'Beetlefield',
+  },
+  {
+    id: 6,
     value: 'PeachAR',
   },
 ]
 
 const projectVisuals = [
   Kahiora,
+  renderingogl,
   pacman,
   writenslash,
   flump,
