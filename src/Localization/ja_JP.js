@@ -6,7 +6,7 @@ export const jpLocalization = {
         "project_0_download": "https://isart-digital.itch.io/kahiora",
         "project_1_name": "Rendering OpenGL (初期段階)",
         "project_1_desc": "APIで物事を試すためOpenGlでサンドボックスプロジェクトです。",
-        "project_1_trailer": "　",
+        "project_1_trailer": "",
         "project_1_download": "https://github.com/Ilygos/RenderingOpenGL",
         "project_2_name": "PAC-MAN: Party Royale",
         "project_2_desc": "Pastagamesのツールプログラマーとして参加していました。 レベルエディタの新バージョンの作成を担当しました。",
