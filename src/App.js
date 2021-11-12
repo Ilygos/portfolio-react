@@ -1,3 +1,7 @@
+// TO DEPLOY THE PORTFOLIO ON GH-PAGES RUN THIS IN CMD:
+// npm run deploy 
+
+
 // ReactJS
 import React, {setGlobal, useGlobal} from 'reactn';
 
