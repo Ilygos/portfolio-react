@@ -22,6 +22,7 @@ import { frLocalization } from './Localization/fr_FR';
 import { jpLocalization } from './Localization/ja_JP';
 
 //Project Images
+import frag from './img/frag.jpg';
 import beetle from './img/beetle.png';
 import flump from './img/flump.png';
 import Kahiora from './img/kaihora.jpg';
@@ -68,35 +69,40 @@ const languages = [
 const projects = [
   {
     id: 0,
+    value: 'Frag Pro Shooter',
+  },
+  {
+    id: 1,
     value: 'Kahiora',
   },
   {
-    id:1,
+    id: 2,
     value: 'Rendering OpenGL (Early Stage)'
   },
   {
-    id: 2,
+    id: 3,
     value: 'PAC-MAN: Party Royal',
   },
   {
-    id: 3,
+    id: 4,
     value: 'Write\'n slash',
   },
   {
-    id: 4,
+    id: 5,
     value: 'Flump vs Humanity',
   },
   {
-    id: 5,
+    id: 6,
     value: 'Beetlefield',
   },
   {
-    id: 6,
+    id: 7,
     value: 'PeachAR',
   },
 ]
 
 const projectVisuals = [
+  frag,
   Kahiora,
   renderingogl,
   pacman,
