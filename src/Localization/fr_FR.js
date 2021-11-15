@@ -33,7 +33,7 @@ export const frLocalization = {
         "project_7_download": "https://play.google.com/store/apps/details?id=com.AlliesGames.PeachAR&hl=en",
     },
     "about": {
-        "line1" : "Je m'appelle Maxence Beaumont, j'ai 23 ans et je suis Game Programmer. Je suis plutôt spécialisé dans les outils et le gameplay.",
+        "line1" : "Je m'appelle Maxence Beaumont, je suis Game Programmer. Je suis plutôt spécialisé dans les outils et le gameplay.",
         "line2" : "Je développe principalement en C++ et C#, que ce soit sur un Unreal, Unity ou encore des moteurs propriétaires.",
         "line3" : "Concernant ma formation, j'ai un Mastère en Game Design and Programming obtenu a Isart Digital, Paris en juin 2020.",
         "line4" : "Si vous souhaitez me contacter, voici mon adresse : contact.maxencebeaumont@gmail.com, vous pouvez aussi m'envoyer un message sur LinkedIn (vous trouverez mon profil en cliquant sur l'icône)."

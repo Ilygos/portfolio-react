@@ -34,7 +34,7 @@ export const jpLocalization = {
         "project_7_download": "https://play.google.com/store/apps/details?id=com.AlliesGames.PeachAR&hl=en",
     },
     "about": {
-        "line1" : "私の名前はボーモンマクサンスです。23歳ゲームプログラマです。 エンジンやゲームプレイに特化しています。",
+        "line1" : "私の名前はボーモンマクサンスです。ゲームプログラマです。 エンジンやゲームプレイに特化しています。",
         "line2" : "主にC++とC#で開発しており、UnrealかUnityかプロプライエタリなエンジンを問わず開発しています。",
         "line3" : "勉強について、 2020年6月にフランスのパリのイザートディジタルでゲームディザインとプログラミングのマスターを卒業しました。",
         "line4" : "連絡が必要な場合は、 メイルアドレス: contact.maxencebeaumont@gmail.com、LinkedInでもメッセージを送ってください。(アイコンでプロファイルを見つけます)."
