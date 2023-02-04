@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/portfolio-react/static/css/main.e46123a2.chunk.css",
-    "main.js": "/portfolio-react/static/js/main.1b966c86.chunk.js",
-    "main.js.map": "/portfolio-react/static/js/main.1b966c86.chunk.js.map",
+    "main.js": "/portfolio-react/static/js/main.22bf6bce.chunk.js",
+    "main.js.map": "/portfolio-react/static/js/main.22bf6bce.chunk.js.map",
     "runtime-main.js": "/portfolio-react/static/js/runtime-main.c94dc782.js",
     "runtime-main.js.map": "/portfolio-react/static/js/runtime-main.c94dc782.js.map",
-    "static/js/2.ae911be6.chunk.js": "/portfolio-react/static/js/2.ae911be6.chunk.js",
-    "static/js/2.ae911be6.chunk.js.map": "/portfolio-react/static/js/2.ae911be6.chunk.js.map",
+    "static/js/2.e35a52dd.chunk.js": "/portfolio-react/static/js/2.e35a52dd.chunk.js",
+    "static/js/2.e35a52dd.chunk.js.map": "/portfolio-react/static/js/2.e35a52dd.chunk.js.map",
     "index.html": "/portfolio-react/index.html",
-    "precache-manifest.3da077f9f4616e0adf1ad4d7ff555b1b.js": "/portfolio-react/precache-manifest.3da077f9f4616e0adf1ad4d7ff555b1b.js",
+    "precache-manifest.b8e6b1903a4fcbf0688e1de9c92b6b33.js": "/portfolio-react/precache-manifest.b8e6b1903a4fcbf0688e1de9c92b6b33.js",
     "service-worker.js": "/portfolio-react/service-worker.js",
     "static/css/main.e46123a2.chunk.css.map": "/portfolio-react/static/css/main.e46123a2.chunk.css.map",
-    "static/js/2.ae911be6.chunk.js.LICENSE.txt": "/portfolio-react/static/js/2.ae911be6.chunk.js.LICENSE.txt",
+    "static/js/2.e35a52dd.chunk.js.LICENSE.txt": "/portfolio-react/static/js/2.e35a52dd.chunk.js.LICENSE.txt",
     "static/media/App.css": "/portfolio-react/static/media/VCR.5fcd6c65.ttf",
     "static/media/beetle.png": "/portfolio-react/static/media/beetle.bc5884b2.png",
     "static/media/download.png": "/portfolio-react/static/media/download.8c640479.png",
@@ -22,15 +22,15 @@
     "static/media/me.jpg": "/portfolio-react/static/media/me.b09e5032.jpg",
     "static/media/pacman.jpg": "/portfolio-react/static/media/pacman.788b8b4e.jpg",
     "static/media/peachar.png": "/portfolio-react/static/media/peachar.6a6621d2.png",
-    "static/media/renderingogl.png": "/portfolio-react/static/media/renderingogl.80d2cc08.png",
+    "static/media/sup.png": "/portfolio-react/static/media/sup.8f7a9cf1.png",
     "static/media/synthgif.gif": "/portfolio-react/static/media/synthgif.db61abbe.gif",
     "static/media/writenslash.png": "/portfolio-react/static/media/writenslash.004f5ad5.png",
     "static/media/youtube.png": "/portfolio-react/static/media/youtube.ae235b9b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.c94dc782.js",
-    "static/js/2.ae911be6.chunk.js",
+    "static/js/2.e35a52dd.chunk.js",
     "static/css/main.e46123a2.chunk.css",
-    "static/js/main.1b966c86.chunk.js"
+    "static/js/main.22bf6bce.chunk.js"
   ]
 }
