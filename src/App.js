@@ -26,7 +26,7 @@ import frag from './img/frag.jpg';
 import beetle from './img/beetle.png';
 import flump from './img/flump.png';
 import Kahiora from './img/kaihora.jpg';
-import renderingogl from './img/renderingogl.png';
+import sup from './img/sup.png';
 import pacman from './img/pacman.jpg';
 import peachar from './img/peachar.png';
 import writenslash from './img/writenslash.png';
@@ -73,11 +73,11 @@ const projects = [
   },
   {
     id: 1,
-    value: 'Kahiora',
+    value: 'SUP: Multiplayer Racing Games',
   },
   {
     id: 2,
-    value: 'Rendering OpenGL (Early Stage)'
+    value: 'Kahiora'
   },
   {
     id: 3,
@@ -103,8 +103,8 @@ const projects = [
 
 const projectVisuals = [
   frag,
+  sup,
   Kahiora,
-  renderingogl,
   pacman,
   writenslash,
   flump,
@@ -185,6 +185,7 @@ function ProjectBody() {
     <img src={projectVisuals[projectID]} className="project-visual" alt=""/>
     <div className="paragraph-container">
       <p className="project-desc">{localization.project[keyPrefix+"_desc"]}</p>
+      <p className='project-platform' style={{ marginTop: 50 }}>{localization.project[keyPrefix+"_platform"]}</p>
       {buttons}
     </div>
     </>
