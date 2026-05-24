@@ -126,8 +126,13 @@ body::after {
 .nav-link.active {
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(105, 217, 232, 0.18));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
+}
+
+.nav-link.active {
+  font-weight: 700;
 }
 
 .lang-switch {
@@ -216,16 +221,16 @@ body::after {
 }
 
 .section-title {
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
 }
 
 .home-title {
-  font-size: clamp(2rem, 4.8vw, 3.8rem);
+  font-size: clamp(1.7rem, 3.9vw, 3.1rem);
 }
 
 .project-title {
   text-align: left;
-  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  font-size: clamp(1.5rem, 3.4vw, 2.6rem);
 }
 
 p {
@@ -385,6 +390,9 @@ p {
   border-radius: 50%;
   border: 4px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 54px rgba(0, 0, 0, 0.45);
+  cursor: grab;
+  touch-action: none;
+  will-change: transform, opacity, filter;
 }
 
 .about-txt,

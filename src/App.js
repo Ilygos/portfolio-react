@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import detectBrowserLanguage from 'detect-browser-language';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls, useMotionValue, useReducedMotion } from 'framer-motion';
 import { Button } from '@heroui/react';
 
 import { enLocalization } from './Localization/en_EN';
@@ -17,6 +17,7 @@ const SECTION_HOME = 'home';
 const SECTION_WORK = 'work';
 const SECTION_ABOUT = 'about';
 const SECTION_CONTACT = 'contact';
+const sectionIds = [SECTION_HOME, SECTION_WORK, SECTION_ABOUT, SECTION_CONTACT];
 
 function assetPath(path) {
   return `.${path}`;
@@ -106,12 +107,26 @@ function getDefaultLanguage() {
   return ENGLISH_KEY;
 }
 
+function getSectionFromHash() {
+  if (typeof window === 'undefined') {
+    return SECTION_HOME;
+  }
+
+  const normalizedHash = window.location.hash.replace('#', '');
+  return sectionIds.includes(normalizedHash) ? normalizedHash : SECTION_HOME;
+}
+
 function App() {
+  const profilePanelRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
   const [language, setLanguage] = useState(ENGLISH_KEY);
   const [activeSection, setActiveSection] = useState(SECTION_HOME);
   const [selectedProjectID, setSelectedProjectID] = useState(8);
   const [isClientMounted, setIsClientMounted] = useState(false);
+  const [isPhotoAnimating, setIsPhotoAnimating] = useState(false);
+  const photoControls = useAnimationControls();
+  const photoX = useMotionValue(0);
+  const photoY = useMotionValue(0);
   const localization = useMemo(() => localizationsByLanguage[language] || enLocalization, [language]);
 
   useEffect(() => {
@@ -138,7 +153,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = [SECTION_HOME, SECTION_WORK, SECTION_ABOUT, SECTION_CONTACT];
+    setActiveSection(getSectionFromHash());
+
+    const handleHashChange = () => {
+      setActiveSection(getSectionFromHash());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleEntry = entries
@@ -163,6 +185,7 @@ function App() {
     });
 
     return () => {
+      window.removeEventListener('hashchange', handleHashChange);
       observer.disconnect();
     };
   }, []);
@@ -174,6 +197,12 @@ function App() {
   const selectedProjectPlatform = localization.project[`${selectedKeyPrefix}_platform`] || '';
   const selectedProjectTrailer = localization.project[`${selectedKeyPrefix}_trailer`] || '';
   const selectedProjectDownload = localization.project[`${selectedKeyPrefix}_download`] || '';
+  const navItems = [
+    { id: SECTION_HOME, label: 'Home' },
+    { id: SECTION_WORK, label: localization.navbar.projects },
+    { id: SECTION_ABOUT, label: localization.navbar.about },
+    { id: SECTION_CONTACT, label: 'Contact' },
+  ];
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -187,6 +216,54 @@ function App() {
   const revealInitial = prefersReducedMotion ? undefined : 'hidden';
   const revealWhileInView = prefersReducedMotion ? undefined : 'show';
 
+  const runPhotoSlingshot = async (velocityX, velocityY) => {
+    if (prefersReducedMotion || isPhotoAnimating) {
+      photoX.set(0);
+      photoY.set(0);
+      return;
+    }
+
+    const currentX = photoX.get();
+    const currentY = photoY.get();
+    const speed = Math.hypot(velocityX, velocityY);
+
+    if (Math.abs(currentX) < 10 && Math.abs(currentY) < 10 && speed < 120) {
+      photoX.set(0);
+      photoY.set(0);
+      return;
+    }
+
+    const launchX = Math.max(-360, Math.min(360, -currentX * 1.28 + velocityX * -0.12));
+    const launchY = Math.max(-260, Math.min(260, -currentY * 1.28 + velocityY * -0.12));
+
+    setIsPhotoAnimating(true);
+
+    await photoControls.start({
+      x: [currentX, currentX + launchX, currentX - launchX * 0.5, currentX + launchX * 0.22, 0],
+      y: [currentY, currentY + launchY, currentY - launchY * 0.5, currentY + launchY * 0.22, 0],
+      transition: {
+        duration: 1.02,
+        times: [0, 0.3, 0.62, 0.83, 1],
+        ease: [0.22, 1, 0.36, 1],
+      },
+    });
+
+    await photoControls.start({
+      opacity: [1, 0, 1],
+      scale: [1, 0.75, 1],
+      filter: ['blur(0px)', 'blur(8px)', 'blur(0px)'],
+      transition: {
+        duration: 0.55,
+        times: [0, 0.48, 1],
+        ease: 'easeInOut',
+      },
+    });
+
+    photoX.set(0);
+    photoY.set(0);
+    setIsPhotoAnimating(false);
+  };
+
   return (
     <div className="app-shell">
       <motion.header
@@ -199,10 +276,19 @@ function App() {
           <a className="brand" href={`#${SECTION_HOME}`}>{localization.navbar.brand}</a>
 
           <div className="nav-links" role="list">
-            <a className={activeSection === SECTION_HOME ? 'nav-link active' : 'nav-link'} href={`#${SECTION_HOME}`}>Home</a>
-            <a className={activeSection === SECTION_WORK ? 'nav-link active' : 'nav-link'} href={`#${SECTION_WORK}`}>{localization.navbar.projects}</a>
-            <a className={activeSection === SECTION_ABOUT ? 'nav-link active' : 'nav-link'} href={`#${SECTION_ABOUT}`}>{localization.navbar.about}</a>
-            <a className={activeSection === SECTION_CONTACT ? 'nav-link active' : 'nav-link'} href={`#${SECTION_CONTACT}`}>Contact</a>
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                className={activeSection === item.id ? 'nav-link active' : 'nav-link'}
+                href={`#${item.id}`}
+                aria-current={activeSection === item.id ? 'page' : undefined}
+                onClick={() => {
+                  setActiveSection(item.id);
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
           <label className="lang-switch" htmlFor="language-switcher">
@@ -271,14 +357,6 @@ function App() {
                 )}
               </motion.div>
 
-              <motion.div className="img-row" variants={staggerItem}>
-                <a href="https://www.linkedin.com/in/maxencebeaumont/" target="_blank" rel="noreferrer" aria-label="Open LinkedIn profile">
-                  <img src={linkedinIcon} className="rounded-rect-button" alt="LinkedIn" />
-                </a>
-                <a href="mailto:contact.maxencebeaumont@gmail.com" aria-label="Send an email">
-                  <img src={gmailIcon} className="rounded-rect-button" alt="Email" />
-                </a>
-              </motion.div>
             </motion.div>
 
             <motion.img
@@ -392,6 +470,7 @@ function App() {
           id={SECTION_ABOUT}
           className="content-panel profile-panel"
           aria-labelledby="about-title"
+          ref={profilePanelRef}
           variants={sectionReveal}
           initial={revealInitial}
           whileInView={revealWhileInView}
@@ -400,7 +479,22 @@ function App() {
           <p className="eyebrow">Profile</p>
           <h2 id="about-title" className="section-title">{localization.navbar.about}</h2>
 
-          <img className="me-image" src={meImage} alt="Portrait of Maxence Beaumont" loading="lazy" />
+          <motion.img
+            className="me-image"
+            src={meImage}
+            alt="Portrait of Maxence Beaumont"
+            loading="lazy"
+            drag={!isPhotoAnimating}
+            dragConstraints={profilePanelRef}
+            dragElastic={0.28}
+            dragMomentum={false}
+            style={{ x: photoX, y: photoY }}
+            animate={photoControls}
+            whileDrag={prefersReducedMotion ? {} : { scale: 1.04, rotate: 1.4, cursor: 'grabbing' }}
+            onDragEnd={(_, info) => {
+              runPhotoSlingshot(info.velocity.x, info.velocity.y);
+            }}
+          />
 
           <div className="paragraph-container">
             <p className="about-txt">{localization.about.line1}</p>
