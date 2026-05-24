@@ -1,0 +1,18 @@
+:root {
+  --color-bg-primary: #081420;
+  --color-bg-deep: #050b12;
+  --color-surface-glass: rgba(255, 255, 255, 0.09);
+  --color-border-glass: rgba(255, 255, 255, 0.18);
+  --color-text-primary: #f5f2e9;
+  --color-text-muted: rgba(245, 242, 233, 0.8);
+  --color-accent-warm: #f0b36b;
+  --color-accent-cool: #69d9e8;
+
+  --shadow-panel-lg: 0 24px 70px rgba(0, 0, 0, 0.45);
+  --radius-panel: 28px;
+  --radius-pill: 999px;
+
+  --motion-fast: 180ms;
+  --motion-medium: 420ms;
+  --motion-slow: 720ms;
+}
