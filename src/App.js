@@ -18,6 +18,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { enLocalization } from './Localization/en_EN';
 import { frLocalization } from './Localization/fr_FR';
 import { jpLocalization } from './Localization/ja_JP';
+import { koLocalization } from './Localization/ko_KR';
 
 // CONSTS
 const PROJECT_STATE = 'project';
@@ -27,6 +28,7 @@ const ABOUT_STATE = 'about';
 const FRENCH_KEY = 'fr';
 const ENGLISH_KEY = 'en';
 const JAPANESE_KEY = 'ja';
+const KOREAN_KEY = 'ko';
 
 const projectVisuals = [
   '/img/frag.jpg',
@@ -37,6 +39,7 @@ const projectVisuals = [
   '/img/flump.png',
   '/img/beetle.png',
   '/img/peachar.png',
+  null,
 ];
 
 const youtubeIcon = '/img/youtube.png';
@@ -54,17 +57,26 @@ const languages = [
     },
     {
       id: 'lang-fr',
-      languageName: "Francais",
+      languageName: "Français",
       languageKey: FRENCH_KEY
     },
     {
       id: 'lang-ja',
       languageName: "日本語",
       languageKey: JAPANESE_KEY
+    },
+    {
+      id: 'lang-ko',
+      languageName: "한국어",
+      languageKey: KOREAN_KEY
     }
 ]
 
 const projects = [
+  {
+    id: 8,
+    value: 'Ensapia Engineering',
+  },
   {
     id: 0,
     value: 'Frag Pro Shooter',
@@ -101,7 +113,7 @@ const projects = [
 
 // GLOBALS
 setGlobal({
-  localization: enLocalization
+  localization: frLocalization
 });
 
 
@@ -122,10 +134,12 @@ function App() {
     const lang = detectBrowserLanguage().substring(0,2);
     if (lang === JAPANESE_KEY)
       setLocalization(jpLocalization);
+    else if (lang === KOREAN_KEY)
+      setLocalization(koLocalization);
     else if (lang === FRENCH_KEY)
       setLocalization(frLocalization);
     else 
-      setLocalization(enLocalization);
+      setLocalization(frLocalization);
   }, [setLocalization]);
   return (
     <div className="app-shell">
@@ -170,7 +184,7 @@ function ProjectBody() {
     <section className="content-panel project-panel">
       <p className="eyebrow">Project spotlight</p>
       <h1 className="project-title">{localization.project[keyPrefix+"_name"]}</h1>
-      <img src={projectVisuals[projectID]} className="project-visual" alt=""/>
+      {projectVisuals[projectID] ? <img src={projectVisuals[projectID]} className="project-visual" alt=""/> : null}
       <div className="paragraph-container">
         <p className="project-desc">{localization.project[keyPrefix+"_desc"]}</p>
         <p className='project-platform'>{localization.project[keyPrefix+"_platform"]}</p>
@@ -248,6 +262,8 @@ function LanguageDropdown() {
       setLocalization(frLocalization);
     else if (lang === JAPANESE_KEY)
       setLocalization(jpLocalization);
+    else if (lang === KOREAN_KEY)
+      setLocalization(koLocalization);
     else 
       setLocalization(enLocalization);
   }

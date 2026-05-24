@@ -106,7 +106,7 @@ body::after {
     rgba(10, 16, 28, 0.22);
   backdrop-filter: blur(28px) saturate(190%);
   box-shadow: var(--shadow);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .navbar-shell::before {
@@ -157,6 +157,8 @@ body::after {
 }
 
 .dropdown-menu {
+  position: absolute;
+  z-index: 40;
   margin-top: 0.75rem;
   padding: 0.5rem;
   border: 1px solid var(--border-strong);
