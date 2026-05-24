@@ -53,7 +53,9 @@ export const jpLocalization = {
         "line4" : "ご連絡は contact.maxencebeaumont@gmail.com までお願いします。LinkedInアイコンからもメッセージを送っていただけます。"
     },
     "home": {
-        "text": "ウェブサイトへようこそ。ぜひプロジェクトをご覧いただき、詳細が必要でしたらお気軽にお問い合わせください。"
+        "headline": "ゲーム開発ツール、AIワークフロー、技術設計。",
+        "text": "ウェブサイトへようこそ。ぜひプロジェクトをご覧いただき、詳細が必要でしたらお気軽にお問い合わせください。",
+        "subtext": "私は、チームがより速く、そして高い品質を保ちながら進められるようなツールや仕組みを作っています。"
     },
     "navbar": {
         "brand": "BEAUMONT MAXENCE",

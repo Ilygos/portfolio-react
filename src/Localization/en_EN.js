@@ -53,7 +53,9 @@ export const enLocalization = {
         "line4" : "If you want to contact me, my email address is contact.maxencebeaumont@gmail.com. You can also send me a message on LinkedIn by clicking the LinkedIn icon."
     },
     "home": {
-        "text": "Welcome to my website! Feel free to look around, check out my projects, or contact me if you need more information."
+        "headline": "Game tools, AI workflows, and technical direction.",
+        "text": "Welcome to my website! Feel free to look around, check out my projects, or contact me if you need more information.",
+        "subtext": "I build tools and systems that help teams ship faster and keep the work quality high."
     },
     "navbar": {
         "brand": "Maxence BEAUMONT",

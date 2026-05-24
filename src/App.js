@@ -29,25 +29,28 @@ const FRENCH_KEY = 'fr';
 const ENGLISH_KEY = 'en';
 const JAPANESE_KEY = 'ja';
 const KOREAN_KEY = 'ko';
+function assetPath(path) {
+  return `.${path}`;
+}
 
 const projectVisuals = [
-  '/img/frag.jpg',
-  '/img/sup.png',
-  '/img/kaihora.jpg',
-  '/img/pacman.jpg',
-  '/img/writenslash.png',
-  '/img/flump.png',
-  '/img/beetle.png',
-  '/img/peachar.png',
+  assetPath('/img/frag.jpg'),
+  assetPath('/img/sup.png'),
+  assetPath('/img/kaihora.jpg'),
+  assetPath('/img/pacman.jpg'),
+  assetPath('/img/writenslash.png'),
+  assetPath('/img/flump.png'),
+  assetPath('/img/beetle.png'),
+  assetPath('/img/peachar.png'),
   null,
 ];
 
-const youtubeIcon = '/img/youtube.png';
-const downloadIcon = '/img/download.png';
-const aboutImage = '/img/synthgif.gif';
-const linkedinIcon = '/img/LinkedIn.png';
-const gmailIcon = '/img/gmail.png';
-const meImage = '/img/me.jpg';
+const youtubeIcon = assetPath('/img/youtube.png');
+const downloadIcon = assetPath('/img/download.png');
+const aboutImage = assetPath('/img/synthgif.gif');
+const linkedinIcon = assetPath('/img/LinkedIn.png');
+const gmailIcon = assetPath('/img/gmail.png');
+const meImage = assetPath('/img/me.jpg');
 
 const languages = [
     {
@@ -131,6 +134,24 @@ setGlobal({
 function App() {
   const [ , setLocalization ] = useGlobal('localization');
   useEffect(() => {
+    const fontDefinitions = [
+      { family: 'Sephora', url: './Fonts/Sephora.ttf' },
+      { family: 'Kosugi', url: './Fonts/KosugiMaru-Regular.ttf' },
+      { family: 'VCR', url: './Fonts/VCR.ttf' },
+    ];
+
+    if (typeof document !== 'undefined' && document.fonts) {
+      Promise.all(
+        fontDefinitions.map(async ({ family, url }) => {
+          const loadedFont = await new FontFace(family, `url(${url})`).load();
+          document.fonts.add(loadedFont);
+          document.documentElement.style.setProperty(`--font-${family.toLowerCase()}`, `"${family}"`);
+          return loadedFont;
+        })
+      ).catch(() => {});
+    }
+
+    document.documentElement.style.setProperty('--portfolio-bg-image', `url("${assetPath('/img/SYNTH_BG.jpg')}")`);
     const lang = detectBrowserLanguage().substring(0,2);
     if (lang === JAPANESE_KEY)
       setLocalization(jpLocalization);
@@ -218,13 +239,24 @@ function HomeBody() {
   const [ localization ] = useGlobal('localization');
   return (
     <section className="content-panel home-panel">
-      <p className="eyebrow">Portfolio</p>
-      <img className="about-image" src={aboutImage} alt=""/>
-      <div className="paragraph-container">
-        <p className="home-txt">{localization.home["text"]}</p>
+      <div className="home-hero">
+        <div className="home-copy">
+          <p className="eyebrow">Portfolio</p>
+          <h1 className="home-title">{localization.home["headline"]}</h1>
+          <p className="home-txt">{localization.home["text"]}</p>
+          <div className="img-row">
+            <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedinIcon} className="rounded-rect-button" alt="LinkedIn profile" /></a>
+            <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmailIcon} className="rounded-rect-button" alt="Send Mail" /></a>
+          </div>
+        </div>
+        <img className="about-image home-image" src={aboutImage} alt=""/>
+      </div>
+      <div className="paragraph-container home-panel-note">
+        <p className="home-txt">{localization.home["subtext"]}</p>
         <div className="img-row">
-          <a href="https://www.linkedin.com/in/maxencebeaumont/" ><img src={linkedinIcon} className="rounded-rect-button" alt="LinkedIn profile" /></a>
-          <a href="mailto:contact.maxencebeaumont@gmail.com" ><img src={gmailIcon} className="rounded-rect-button" alt="Send Mail" /></a>
+          <span className="home-pill">Game tools</span>
+          <span className="home-pill">AI workflows</span>
+          <span className="home-pill">Next.js</span>
         </div>
       </div>
     </section>

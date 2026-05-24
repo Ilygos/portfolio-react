@@ -53,7 +53,9 @@ export const koLocalization = {
         "line4" : "연락을 원하시면 contact.maxencebeaumont@gmail.com 으로 메일을 보내주시거나, LinkedIn 아이콘을 클릭해 제 프로필로 이동하실 수 있습니다."
     },
     "home": {
-        "text": "제 웹사이트에 오신 것을 환영합니다! 자유롭게 둘러보시고, 제 프로젝트를 살펴보거나 추가 정보가 필요하시면 연락해 주세요."
+        "headline": "게임 툴, AI 워크플로, 기술 방향 설계.",
+        "text": "제 웹사이트에 오신 것을 환영합니다! 자유롭게 둘러보시고, 제 프로젝트를 살펴보거나 추가 정보가 필요하시면 연락해 주세요.",
+        "subtext": "팀이 더 빠르게 움직이면서도 높은 품질을 유지할 수 있도록 돕는 도구와 시스템을 만듭니다."
     },
     "navbar": {
         "brand": "Maxence BEAUMONT",

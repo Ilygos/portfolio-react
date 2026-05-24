@@ -52,7 +52,9 @@ export const frLocalization = {
         "line4" : "Si vous souhaitez me contacter, mon adresse est contact.maxencebeaumont@gmail.com. Vous pouvez aussi m'envoyer un message sur LinkedIn en cliquant sur l'icône."
     },
     "home": {
-        "text": "Bienvenue sur mon portfolio ! N'hésitez pas à parcourir le site, découvrir mes projets et me contacter si vous souhaitez plus d'informations."
+        "headline": "Outils de jeu, workflows IA et direction technique.",
+        "text": "Bienvenue sur mon portfolio ! N'hésitez pas à parcourir le site, découvrir mes projets et me contacter si vous souhaitez plus d'informations.",
+        "subtext": "Je conçois des outils et des systèmes qui aident les équipes à aller plus vite tout en gardant un haut niveau de qualité."
     },
     "navbar": {
         "brand": "Maxence BEAUMONT",
